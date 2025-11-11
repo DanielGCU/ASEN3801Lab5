@@ -11,7 +11,7 @@ aerodynamic coefficients. Determine modal characteristics from aircraft performa
 %% Housekeeping 
 
 clc
-clears
+clear
 close all
 
 %% Problem 2
