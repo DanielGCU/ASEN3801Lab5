@@ -37,7 +37,7 @@ Iz = aircraft_parameters.Iz;
 Ixz = aircraft_parameters.Ixz;
 
 % Aero Forces and Moments
-
+density = atmos(zE);
 [aeroforces, aeromoments] = AeroForcesAndMoments(aircraft_state, aircraft_surfaces, wind_inertial, density, aircraft_parameters);
 
 % Unpack aeroforces vector
