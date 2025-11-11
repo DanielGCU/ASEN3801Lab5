@@ -1,4 +1,4 @@
-function xdot = AircraftEOM(time, aircraft_state, aircraft_surfaces, wind_inertial, aircraft_parameters)
+function xdot = AircraftEOM(~, aircraft_state, aircraft_surfaces, wind_inertial, aircraft_parameters)
 
 %----------------------------------------------------------------
 % Inputs:
@@ -13,6 +13,9 @@ function xdot = AircraftEOM(time, aircraft_state, aircraft_surfaces, wind_inerti
 %----------------------------------------------------------------
 
 % Extract aircraft state
+xE = aircraft_state(1);
+yE = aircraft_state(2);
+zE = aircraft_state(3);
 phi = aircraft_state(4);
 theta = aircraft_state(5);
 psi = aircraft_state(6);
@@ -34,6 +37,7 @@ Iz = aircraft_parameters.Iz;
 Ixz = aircraft_parameters.Ixz;
 
 % Aero Forces and Moments
+
 [aeroforces, aeromoments] = AeroForcesAndMoments(aircraft_state, aircraft_surfaces, wind_inertial, density, aircraft_parameters);
 
 % Unpack aeroforces vector
@@ -46,7 +50,7 @@ L = aeromoments(1);
 M = aeromoments(2);
 N = aeromoments(3);
 
-% Trigonometric Evaluated Angles
+% Trigoneometric Evaluated Angles
 cPH = cos(phi);
 cT = cos(theta);
 cPS = cos(psi);
@@ -89,7 +93,7 @@ gamma_7 = (Ix*(Ix - Iy) + Ixz^2) / gamma;
 gamma_8 = Ix / gamma;
 
 p_dot = (gamma_1*p*q) - (gamma_2*q*r) + (gamma_3*L) + (gamma_4*N);
-q_dot = (gamma_5*p*r) - (gamma_6*(p^2 - r^2) + M/Iy;
+q_dot = (gamma_5*p*r) - (gamma_6)*(p^2 - r^2) + M/Iy;
 r_dot = (gamma_7*p*q) - (gamma_1*q*r) + (gamma_4*L) + (gamma_8*N);
 
 xdot = [inerital_pos_dot;euler_angle_rates;uE_dot;vE_dot;wE_dot;p_dot;q_dot;r_dot];
