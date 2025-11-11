@@ -6,10 +6,13 @@ clear
 close all
 
 %% function call
-xdot = AircraftEOMDoublet(time, aircraft_state, aircraft_surfaces, doublet_size, doublet_time, wind_inertial, aircraft_parameters);
-
+time = [0 3]; %seconds
 doublet_size = 15; %degrees
 doublet_time = 0.25; %seconds
+
+xdot = AircraftEOMDoublet(time, aircraft_state, aircraft_surfaces, doublet_size, doublet_time, wind_inertial, aircraft_parameters);
+
+
 %% Problem 3a (doublet)
 
 %elevator_input_trim comes from aircraft_surfaces
@@ -25,6 +28,12 @@ elevator_input = [elevator_input_trim + doublet_size, (0 < t) && (t <= doublet_t
 y0 = [0, 0, -1800, 0, 0.02780, 0, 20.99, 0, 0.5837, 0, 0, 0]; %initial trim from 2.2
 control_input_2_2 = [0.1079*180/pi, 0, 0, 0.3182]; %control surface inputs 2.2
 
-
-tspan = [0 3]; %seconds
+odefun = xdot;
+tspan = time; %seconds
 [t,y] = ode45(odefun,tspan,y0);
+
+%% Plotting
+
+plot(t,y);
+ylabel(EOM);
+xlabel(time);
