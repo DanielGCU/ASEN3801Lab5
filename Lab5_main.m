@@ -51,5 +51,27 @@ control_input_2_3 = [5, 2, -13, 0.3];
 % Plot Case 3 
 
 
+%% Problem 3 
+
+% Initial Conditions (same as 2.2)
+x0_3 = [0, 0, -1800, 0, 0.02780, 0, 20.99, 0, 0.5837, 0, 0, 0];
+control_input_3 = [0.1079*180/pi, 0, 0, 0.3182];
+
+% Run using EOM with time 1  
+
+
+% Plot 
+
+
+% Run using EOM with time 2 
+
+
+% Plot
+
+
+
+
+
+
 
 
