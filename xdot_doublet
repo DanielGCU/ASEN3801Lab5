@@ -1,0 +1,20 @@
+% not complete yet, question 3a
+%% Housekeeping 
+
+clc
+clear
+close all
+
+%% function call
+xdot = AircraftEOMDoublet(time, aircraft_state, aircraft_surfaces, doublet_size, doublet_time, wind_inertial, aircraft_parameters);
+
+
+%% Problem 3a (doublet)
+
+%elevator_input_trim comes from aircraft_surfaces
+elevator_input_trim = aircraft_surfaces(1,1); %see AeroForcesAndMoments.m, line 31
+
+%finding elevator_input as a function of time
+elevator_input = [elevator_input_trim + doublet_size, (0 < t) && (t <= doublet_time);
+                  elevator_input_trim - doublet_size, (double_time < t) && (t <= 2*doublet_time);
+                  elevator_input_trim, t > 2*doublet_time];
