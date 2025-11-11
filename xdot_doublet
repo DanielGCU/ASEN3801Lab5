@@ -1,6 +1,7 @@
 % not complete yet, question 3a
-%% Housekeeping 
 
+%% Housekeeping 
+%author: Ridley
 clc
 clear
 close all
@@ -12,6 +13,8 @@ doublet_time = 0.25; %seconds
 
 xdot = AircraftEOMDoublet(time, aircraft_state, aircraft_surfaces, doublet_size, doublet_time, wind_inertial, aircraft_parameters);
 
+%aircraft_state and aircraft_surfaces comes from AeroForcesAndMomemts.m
+%not sure where wind_inertial and aircraft_parameters come from
 
 %% Problem 3a (doublet)
 
@@ -28,7 +31,8 @@ elevator_input = [elevator_input_trim + doublet_size, (0 < t) && (t <= doublet_t
 y0 = [0, 0, -1800, 0, 0.02780, 0, 20.99, 0, 0.5837, 0, 0, 0]; %initial trim from 2.2
 control_input_2_2 = [0.1079*180/pi, 0, 0, 0.3182]; %control surface inputs 2.2
 
-odefun = xdot;
+odefun = xdot; %honestly not sure if this is right function
+
 tspan = time; %seconds
 [t,y] = ode45(odefun,tspan,y0);
 
