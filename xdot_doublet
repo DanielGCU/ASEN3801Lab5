@@ -8,10 +8,10 @@ close all
 
 %% function call
 time = [0 3]; %seconds
-aircraft_state = [0, 0, -1800; %m
-                  0, 0.02780, 0; %rad
-                  20.99, 0, 0.5837; %m/s
-                  0, 0, 0]; %rad/s                 %from 2.2
+aircraft_state = [0; 0; -1800; %m
+                  0; 0.02780; 0; %rad
+                  20.99; 0; 0.5837; %m/s
+                  0; 0; 0]; %rad/s                 %from 2.2
 aircraft_surfaces = [0.1079*180/pi; %rad
                      0; %rad
                      0; %rad
@@ -28,24 +28,24 @@ xdot = AircraftEOMDoublet(time, aircraft_state, aircraft_surfaces, doublet_size,
 %% Breaking up aircraft_state and aircraft_surfaces
 
 % aircraft_state = [xi, yi, zi, roll, pitch, yaw, u, v, w, p, q, r]
-xi = aircraft_state(1,1);
-yi = aircraft_state(1,2);
-zi = aircraft_state(1,3);
-roll = aircraft_state(2,1);
-pitch = aircraft_state(2,2);
-yaw = aircraft_state(2,3);
-u = aircraft_state(3,1);
-v = aircraft_state(3,2);
-w = aircraft_state(3,3);
-p = aircraft_state(4,1);
-q = aircraft_state(4,2);
-r = aircraft_state(4,3);
+xi = aircraft_state(1);
+yi = aircraft_state(2);
+zi = aircraft_state(3);
+roll = aircraft_state(4);
+pitch = aircraft_state(5);
+yaw = aircraft_state(6);
+u = aircraft_state(7);
+v = aircraft_state(8);
+w = aircraft_state(9);
+p = aircraft_state(10);
+q = aircraft_state(11);
+r = aircraft_state(12);
 
 %aircraft_surfaces = [de da dr dt];
-de = aircraft_surfaces(1,1);
-da = aircraft_surfaces(2,1);
-dr = aircraft_surfaces(3,1);
-dt = aircraft_surfaces(4,1);
+de = aircraft_surfaces(1);
+da = aircraft_surfaces(2);
+dr = aircraft_surfaces(3);
+dt = aircraft_surfaces(4);
 %% Breaking up aircraft parameters and wind inertial
 
 % Extract aircraft parameters (from AircraftEOM.m lines 28-34)
