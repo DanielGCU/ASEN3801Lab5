@@ -16,6 +16,38 @@ xdot = AircraftEOMDoublet(time, aircraft_state, aircraft_surfaces, doublet_size,
 %aircraft_state and aircraft_surfaces comes from AeroForcesAndMomemts.m
 %not sure where wind_inertial and aircraft_parameters come from
 
+%% Breaking up aircraft_state and aircraft_surfaces
+
+% aircraft_state = [xi, yi, zi, roll, pitch, yaw, u, v, w, p, q, r]
+xi = aircraft_state(1);
+yi = aircraft_state(2);
+zi = aircraft_state(3);
+roll = aircraft_state(4);
+pitch = aircraft_state(5);
+yaw = aircraft_state(6);
+u = aircraft_state(7);
+v = aircraft_state(8);
+w = aircraft_state(9);
+p = aircraft_state(10);
+q = aircraft_state(11);
+r = aircraft_state(12);
+
+%aircraft_surfaces = [de da dr dt];
+de = aircraft_surfaces(1);
+da = aircraft_surfaces(2);
+dr = aircraft_surfaces(3);
+dt = aircraft_surfaces(4);
+
+%% Breaking up aircraft parameters
+
+% Extract aircraft parameters (from AircraftEOM.m lines 28-34)
+g = aircraft_parameters.g;
+m = aircraft_parameters.m;
+Ix = aircraft_parameters.Ix;
+Iy = aircraft_parameters.Iy;
+Iz = aircraft_parameters.Iz;
+Ixz = aircraft_parameters.Ixz;
+
 %% Problem 3a (doublet)
 
 %elevator_input_trim comes from aircraft_surfaces
