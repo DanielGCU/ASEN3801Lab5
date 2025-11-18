@@ -8,12 +8,21 @@ close all
 
 %% function call
 time = [0 3]; %seconds
+
 doublet_size = 15; %degrees
 doublet_time = 0.25; %seconds
 
+aircraft_state = [0, 0, -1800; 
+                  0, 0.02780, 0; 
+                  20.99, 0, 0.5837; 
+                  0, 0, 0]; %from 2.2
+aircraft_surfaces = [0.1079*180/pi;
+                     0; 
+                     0; 
+                     0.3182]; %from 2.2
+
 xdot = AircraftEOMDoublet(time, aircraft_state, aircraft_surfaces, doublet_size, doublet_time, wind_inertial, aircraft_parameters);
 
-%aircraft_state and aircraft_surfaces comes from AeroForcesAndMomemts.m
 %not sure where wind_inertial and aircraft_parameters come from
 
 %% Breaking up aircraft_state and aircraft_surfaces
@@ -38,7 +47,7 @@ da = aircraft_surfaces(2);
 dr = aircraft_surfaces(3);
 dt = aircraft_surfaces(4);
 
-%% Breaking up aircraft parameters
+%% Breaking up aircraft parameters and wind inertial
 
 % Extract aircraft parameters (from AircraftEOM.m lines 28-34)
 g = aircraft_parameters.g;
@@ -60,8 +69,10 @@ elevator_input = [elevator_input_trim + doublet_size, (0 < t) && (t <= doublet_t
 
 
 %% Ode45 setup
-y0 = [0, 0, -1800, 0, 0.02780, 0, 20.99, 0, 0.5837, 0, 0, 0]; %initial trim from 2.2
-control_input_2_2 = [0.1079*180/pi, 0, 0, 0.3182]; %control surface inputs 2.2
+
+%next two lines probably wrong
+%y0 = [0, 0, -1800, 0, 0.02780, 0, 20.99, 0, 0.5837, 0, 0, 0]; %initial trim from 2.2
+%control_input_2_2 = [0.1079*180/pi, 0, 0, 0.3182]; %control surface inputs 2.2
 
 odefun = xdot; %honestly not sure if this is right function
 
