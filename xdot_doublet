@@ -8,15 +8,15 @@ close all
 
 %% function call
 time = [0 3]; %seconds
-aircraft_state = [0, 0, -1800; 
-                  0, 0.02780, 0; 
-                  20.99, 0, 0.5837; 
-                  0, 0, 0]; %from 2.2
-aircraft_surfaces = [0.1079*180/pi;
-                     0; 
-                     0; 
-                     0.3182]; %from 2.2
-doublet_size = 15; %degrees
+aircraft_state = [0, 0, -1800; %m
+                  0, 0.02780, 0; %rad
+                  20.99, 0, 0.5837; %m/s
+                  0, 0, 0]; %rad/s                 %from 2.2
+aircraft_surfaces = [0.1079*180/pi; %rad
+                     0; %rad
+                     0; %rad
+                     0.3182]; %rad                 %from 2.2
+doublet_size = 15; %degrees   %in rad => doublet_size = (15*2*pi) / 180;
 doublet_time = 0.25; %seconds
 
 %not sure where wind_inertial and aircraft_parameters come from
