@@ -8,10 +8,6 @@ close all
 
 %% function call
 time = [0 3]; %seconds
-
-doublet_size = 15; %degrees
-doublet_time = 0.25; %seconds
-
 aircraft_state = [0, 0, -1800; 
                   0, 0.02780, 0; 
                   20.99, 0, 0.5837; 
@@ -20,10 +16,12 @@ aircraft_surfaces = [0.1079*180/pi;
                      0; 
                      0; 
                      0.3182]; %from 2.2
-
-xdot = AircraftEOMDoublet(time, aircraft_state, aircraft_surfaces, doublet_size, doublet_time, wind_inertial, aircraft_parameters);
+doublet_size = 15; %degrees
+doublet_time = 0.25; %seconds
 
 %not sure where wind_inertial and aircraft_parameters come from
+
+xdot = AircraftEOMDoublet(time, aircraft_state, aircraft_surfaces, doublet_size, doublet_time, wind_inertial, aircraft_parameters);
 
 %% Breaking up aircraft_state and aircraft_surfaces
 
