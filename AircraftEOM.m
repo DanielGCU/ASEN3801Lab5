@@ -50,25 +50,25 @@ L = aeromoments(1);
 M = aeromoments(2);
 N = aeromoments(3);
 
-% Trigoneometric Evaluated Angles
+% Trig
 cPH = cos(phi);
-cT = cos(theta);
-cPS = cos(psi);
 sPH = sin(phi);
-sT = sin(theta);
+cT  = cos(theta);
+sT  = sin(theta);
+tT  = tan(theta);
+cPS = cos(psi);
 sPS = sin(psi);
-tT = tan(theta);
-secT = sec(theta);
+secT = 1/cos(theta);
 
 % Rotation Matrix
-Rot321 = [cT*cPS,sPH*sT*cPS-cPH*sPS,cPH*sT*cPS+sPH*sPS;
-             cT*sPS,sPH*sT*sPS+cPH*cPS,cPH*sT*sPS-sPH*cPS;
-             -sT,sPH*cT,cPH*cT];
+Rot321 = [ cT*cPS,  sPH*sT*cPS - cPH*sPS,  cPH*sT*cPS + sPH*sPS;
+           cT*sPS,  sPH*sT*sPS + cPH*cPS,  cPH*sT*sPS - sPH*cPS;
+          -sT,      sPH*cT,               cPH*cT ];
 
 % Euler Angle Rates Matrix
-EulMat = [1,sPH*tT,cPH*tT;
-          0,cPH,-sPH
-          0,sPH*secT,cPH*secT];
+EulMat = [ 1,          sPH*tT,     cPH*tT;
+           0,          cPH,       -sPH;
+           0,  sPH*secT,  cPH*secT ];
 
 % Inerital Position Derivatives
 inerital_pos_dot = Rot321 * [uE;vE;wE];
@@ -77,9 +77,9 @@ inerital_pos_dot = Rot321 * [uE;vE;wE];
 euler_angle_rates = EulMat * ang_vel;
 
 % Inertial Velocity in Body Derivatives
-uE_dot = r*vE - q*wE - g*sT + X/m;
-vE_dot = p*wE - r*uE + g*cT*sPH + Y/m;
-wE_dot = q*uE - p*vE + g*cT*cPH + Z/m;
+uE_dot = r.*vE - q.*wE - g*sT + X./m;
+vE_dot = p.*wE - r.*uE + g*cT.*sPH + Y./m;
+wE_dot = q.*uE - p.*vE + g*cT.*cPH + Z./m;
 
 % Roll Rate Derivatives
 gamma = Ix*Iz - (Ixz)^2;
