@@ -60,7 +60,7 @@ Ixz = aircraft_parameters.Ixz;
 %% Problem 3a (doublet)
 
 %elevator_input_trim comes from aircraft_surfaces
-elevator_input_trim = aircraft_surfaces(1,1); %see AeroForcesAndMoments.m, line 31
+elevator_input_trim = de;
 
 %finding elevator_input as a function of time
 elevator_input = [elevator_input_trim + doublet_size, (0 < t) && (t <= doublet_time);
