@@ -1,0 +1,11 @@
+function body_vec = TransformFromInertialToBody(Inertial_vec, EulerAngles)
+
+phi = EulerAngles(1, 1);
+theta = EulerAngles(2, 1);
+psi = EulerAngles(3, 1);
+
+
+
+
+
+end
