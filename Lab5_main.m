@@ -132,6 +132,38 @@ control_3_1(1, idx2) = control_3_1(1) - doublet_size;
 % Plot
 PlotAircraftSim(t_3_2, states_3_2, control_3_1, fig_5, col_1);
 
+%% Phugoid Damping Ratio Calculation
+
+u = states_3_2(7, :);
+time = t_3_2;
+
+% Find peaks
+[peak_vals, peak_locs_idx] = findpeaks(u, time);
+
+num_cycles = 1; 
+
+steady_state = 21;
+p1 = peak_vals(1) - steady_state;
+p2 = peak_vals(1 + num_cycles) - steady_state;
+
+% Logarithmic decrement
+delta = (1/num_cycles) * log(p1 / p2);
+
+% Damping ratio
+zeta = delta / sqrt(4*pi^2 + delta^2);
+
+% Phugoid period (average time between peaks)
+periods = diff(peak_locs_idx);  % time differences between successive peaks
+T_phugoid = mean(periods);
+
+% Natural Freq
+omega_n = 2*pi / T_phugoid;
+
+fprintf('Phugoid log decrement delta = %.5f\n', delta);
+fprintf('Damping ratio zeta = %.5f\n', zeta);
+fprintf('Natural frequency omega_n = %.5f rad/s\n', omega_n')
+
+
 
 
 
